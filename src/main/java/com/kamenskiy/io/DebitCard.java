@@ -3,6 +3,8 @@ package com.kamenskiy.io;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DebitCard extends BankCard {
@@ -21,11 +23,13 @@ public class DebitCard extends BankCard {
 
     @Override
     public BigDecimal getBalance() {
-        return null;
+        return balance;
     }
 
     @Override
     public List<String> getAvailableFundsInfo() {
-        return null;
+        List<String> availableFunds = new ArrayList<>();
+        availableFunds.add(balance.toString());
+        return Collections.unmodifiableList(availableFunds);
     }
 }

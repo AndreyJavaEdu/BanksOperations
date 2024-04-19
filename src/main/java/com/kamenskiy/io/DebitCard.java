@@ -2,9 +2,8 @@ package com.kamenskiy.io;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 
 public class DebitCard extends BankCard {
     public DebitCard(BigDecimal balance) {
@@ -35,9 +34,7 @@ public class DebitCard extends BankCard {
     }
 
     @Override
-    public List<String> getAvailableFundsInfo() {
-        List<String> availableFunds = new ArrayList<>();
-        availableFunds.add(balance.toString());
-        return Collections.unmodifiableList(availableFunds);
+    public Map<String, BigDecimal> getAvailableFundsInfo() {
+        return Collections.singletonMap("Баланс:", balance);
     }
 }

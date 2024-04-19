@@ -10,13 +10,13 @@ public abstract class BankCard {
         this.balance = balance;
     }
 
-    public void putMoney(BigDecimal amount){
-        balance.add(amount);
-    }
+    public abstract void putMoney(BigDecimal amount);
 
     public abstract boolean pay(BigDecimal amount);
 
-    public abstract BigDecimal getBalance();
+    public abstract String getBalanceInfo();
 
-    public abstract List<String> getAvailableFundsInfo();
+    public  List<String> getAvailableFundsInfo(){
+return null;
+    }
 }

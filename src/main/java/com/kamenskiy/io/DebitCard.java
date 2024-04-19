@@ -12,6 +12,14 @@ public class DebitCard extends BankCard {
     }
 
     @Override
+    public void putMoney(BigDecimal amount) {
+        if (balance.compareTo(BigDecimal.ZERO) >= 0) {
+            balance = balance.add(amount);
+            System.out.println("Пополнение денежных средств на сумму: " + amount);
+        }
+    }
+
+    @Override
     public boolean pay(BigDecimal amount) {
         if (amount.compareTo(balance) <= 0) {
             balance = balance.subtract(amount, new MathContext(3));
@@ -21,8 +29,9 @@ public class DebitCard extends BankCard {
     }
 
     @Override
-    public BigDecimal getBalance() {
-        return balance;
+    public String getBalanceInfo() {
+        var balanceOfDebitCard = balance.toString();
+        return "Доступные денежные средства: " + balanceOfDebitCard;
     }
 
     @Override

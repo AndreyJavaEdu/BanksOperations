@@ -23,6 +23,14 @@ public class BonusDebitCard extends DebitCard {
         this.bonusPoints = bonusPints;
     }
 
+    public BigDecimal getBonusPoints() {
+        return bonusPoints;
+    }
+
+    public void setBonusPoints(BigDecimal bonusPoints) {
+        this.bonusPoints = bonusPoints;
+    }
+
     public double getBonusPointsRate() {
         return bonusPointsRate;
     }
@@ -32,26 +40,16 @@ public class BonusDebitCard extends DebitCard {
     }
 
     @Override
-    public void putMoney(BigDecimal amount) {
-        super.putMoney(amount);
-    }
-
-    @Override
     public boolean pay(BigDecimal amount) {
         boolean successOperation = super.pay(amount);
         if (successOperation) {
-            bonusPoints = bonusPoints.add(getBonusPoints(amount));
+            bonusPoints = bonusPoints.add(getPointsWhenPay(amount));
         }
         return successOperation;
     }
 
-    private BigDecimal getBonusPoints(BigDecimal amount) {
+    private BigDecimal getPointsWhenPay(BigDecimal amount) {
         return amount.multiply(BigDecimal.valueOf(bonusPointsRate)).divide(BigDecimal.valueOf(100), 3, RoundingMode.HALF_DOWN);
-    }
-
-    @Override
-    public BigDecimal getBalanceInfo() {
-        return super.getBalanceInfo();
     }
 
     @Override

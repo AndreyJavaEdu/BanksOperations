@@ -4,19 +4,23 @@ import com.kamenskiy.io.DebitCard;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 public class BonusDebitCard extends DebitCard {
     private double bonusPointsRate; //процентная ставка по которой расчитываются бонусные баллы
+    private BigDecimal bonusPoints; //количество бонусных баллов
 
-
-    public BonusDebitCard(BigDecimal balance) {
+    public BonusDebitCard(BigDecimal balance, BigDecimal bonusPints) {
         super(balance);
+        this.bonusPoints = bonusPints;
     }
 
-    public BonusDebitCard(BigDecimal balance, double bonusPointsRate) {
+    public BonusDebitCard(BigDecimal balance, double bonusPointsRate, BigDecimal bonusPints) {
         super(balance);
         this.bonusPointsRate = bonusPointsRate;
+        this.bonusPoints = bonusPints;
     }
 
     public double getBonusPointsRate() {
@@ -35,8 +39,8 @@ public class BonusDebitCard extends DebitCard {
     @Override
     public boolean pay(BigDecimal amount) {
         boolean successOperation = super.pay(amount);
-        if (successOperation){
-            getBonusPoints(amount);
+        if (successOperation) {
+            bonusPoints = bonusPoints.add(getBonusPoints(amount));
         }
         return successOperation;
     }
@@ -52,6 +56,10 @@ public class BonusDebitCard extends DebitCard {
 
     @Override
     public Map<String, BigDecimal> getAvailableFundsInfo() {
-        return super.getAvailableFundsInfo();
+        Map<String, BigDecimal> availableFunds = new HashMap<>();
+        availableFunds.put("Баланс на дебетовой карте с бонусными балами", balance);
+        availableFunds.put("Процентная ставка бонусных баллов", BigDecimal.valueOf(bonusPointsRate));
+        availableFunds.put("Количество бонусных баллов", bonusPoints);
+        return Collections.unmodifiableMap(availableFunds);
     }
 }

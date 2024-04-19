@@ -28,9 +28,9 @@ public class DebitCard extends BankCard {
     }
 
     @Override
-    public String getBalanceInfo() {
-        var balanceOfDebitCard = balance.toString();
-        return "Доступные денежные средства: " + balanceOfDebitCard;
+    public BigDecimal getBalanceInfo() {
+        System.out.println("Доступные денежные средства: " + balance);
+        return balance;
     }
 
     @Override

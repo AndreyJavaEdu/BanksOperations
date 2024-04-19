@@ -14,7 +14,7 @@ public abstract class BankCard {
 
     public abstract boolean pay(BigDecimal amount);
 
-    public abstract String getBalanceInfo();
+    public abstract BigDecimal getBalanceInfo();
 
     public abstract Map<String, BigDecimal> getAvailableFundsInfo();
 }

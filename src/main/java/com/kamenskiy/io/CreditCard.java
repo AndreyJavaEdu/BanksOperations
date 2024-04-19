@@ -56,8 +56,8 @@ public class CreditCard extends BankCard {
 
 
     @Override
-    public String getBalanceInfo() {
-        String fullBalance = balance.add(creditPart).toString();
+    public BigDecimal getBalanceInfo() {
+        var fullBalance = balance.add(creditPart);
         System.out.println("Общий баланс кредитной карты с учетом собственных и доступных кредитных средств: " + fullBalance);
         return fullBalance;
     }

@@ -1,7 +1,6 @@
 package com.kamenskiy.io;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public class CreditCard extends BankCard {
     private final BigDecimal CREDIT_LIMIT;
@@ -15,6 +14,10 @@ public class CreditCard extends BankCard {
 
     public BigDecimal getCreditPart() {
         return creditPart;
+    }
+
+    public BigDecimal getCREDIT_LIMIT() {
+        return CREDIT_LIMIT;
     }
 
     @Override
@@ -39,7 +42,7 @@ public class CreditCard extends BankCard {
         } else {
             var remainingDebt = amount.subtract(balance);
             if (creditPart.compareTo(remainingDebt) >= 0) {
-                creditPart = creditPart.subtract(remainingDebt) ;
+                creditPart = creditPart.subtract(remainingDebt);
                 balance = BigDecimal.ZERO;
             } else {
                 return false; // Недостаточно средств и кредитной части
@@ -49,16 +52,9 @@ public class CreditCard extends BankCard {
     }
 
 
-@Override
-public String getBalanceInfo() {
-    String fullBalance = balance.add(creditPart).toString();
-    return "Общий баланс кредитной карты с учетом собственных и доступных кредитных средств: " + fullBalance;
-}
-
-
-
-
-public BigDecimal getCREDIT_LIMIT() {
-    return CREDIT_LIMIT;
-}
+    @Override
+    public String getBalanceInfo() {
+        String fullBalance = balance.add(creditPart).toString();
+        return "Общий баланс кредитной карты с учетом собственных и доступных кредитных средств: " + fullBalance;
+    }
 }

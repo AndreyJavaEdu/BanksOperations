@@ -15,7 +15,7 @@ public class DebitCard extends BankCard {
     public void putMoney(BigDecimal amount) {
         if (balance.compareTo(BigDecimal.ZERO) >= 0) {
             balance = balance.add(amount);
-            System.out.println("Пополнение денежных средсств на сумму: " + amount);
+            System.out.println("Пополнение денежных средств на сумму: " + amount);
         }
     }
 

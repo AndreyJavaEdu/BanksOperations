@@ -50,15 +50,12 @@ public class CreditCard extends BankCard {
 
 
 @Override
-public BigDecimal getBalance() {
-    return null;
+public String getBalanceInfo() {
+    String fullBalance = balance.add(creditPart).toString();
+    return "Общий баланс кредитной карты с учетом собственных и доступных кредитных средств: " + fullBalance;
 }
 
-@Override
-public List<String> getAvailableFundsInfo() {
 
-    return null;
-}
 
 
 public BigDecimal getCREDIT_LIMIT() {

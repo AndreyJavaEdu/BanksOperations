@@ -1,7 +1,7 @@
 package com.kamenskiy.io;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Map;
 
 public abstract class BankCard {
     protected BigDecimal balance;
@@ -14,9 +14,7 @@ public abstract class BankCard {
 
     public abstract boolean pay(BigDecimal amount);
 
-    public abstract String getBalanceInfo();
+    public abstract BigDecimal getBalanceInfo();
 
-    public  List<String> getAvailableFundsInfo(){
-return null;
-    }
+    public abstract Map<String, BigDecimal> getAvailableFundsInfo();
 }

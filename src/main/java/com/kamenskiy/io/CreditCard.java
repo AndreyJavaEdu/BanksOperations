@@ -1,6 +1,9 @@
 package com.kamenskiy.io;
 
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreditCard extends BankCard {
     private final BigDecimal CREDIT_LIMIT;
@@ -53,8 +56,18 @@ public class CreditCard extends BankCard {
 
 
     @Override
-    public String getBalanceInfo() {
-        String fullBalance = balance.add(creditPart).toString();
-        return "Общий баланс кредитной карты с учетом собственных и доступных кредитных средств: " + fullBalance;
+    public BigDecimal getBalanceInfo() {
+        var fullBalance = balance.add(creditPart);
+        System.out.println("Общий баланс кредитной карты с учетом собственных и доступных кредитных средств: " + fullBalance);
+        return fullBalance;
+    }
+
+    @Override
+    public Map<String, BigDecimal> getAvailableFundsInfo() {
+        Map<String, BigDecimal>  availableFunds= new HashMap<>();
+        availableFunds.put("Баланс, включающий только собственные средства", balance);
+        availableFunds.put("Основные средства, включающие собственные и кредитные средства",getBalanceInfo());
+        availableFunds.put("Кредитный лимит данной кредитной карты", CREDIT_LIMIT);
+        return Collections.unmodifiableMap(availableFunds);
     }
 }

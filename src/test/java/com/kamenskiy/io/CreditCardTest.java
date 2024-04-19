@@ -25,7 +25,7 @@ class CreditCardTest {
 
     @Test
     void getBalanceInfo() {
-        String info = creditCard.getBalanceInfo();
+        var info = creditCard.getBalanceInfo();
         Assertions.assertNotNull(info);
     }
 }

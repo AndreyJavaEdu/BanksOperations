@@ -4,9 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class BonusDebitCardTest {
     BonusDebitCard bonusDebitCard = new BonusDebitCard(BigDecimal.valueOf(10_000), 1, BigDecimal.ZERO);
@@ -17,7 +14,6 @@ class BonusDebitCardTest {
         boolean resultOfPayOperation1 = bonusDebitCard.pay(BigDecimal.valueOf(100_000));
         boolean resultOfPayOperation2 = bonusDebitCard.pay(BigDecimal.valueOf(5_000));
         boolean resultOfPayOperation3 = bonusDebitCard.pay(BigDecimal.valueOf(5_000));
-        BigDecimal balanceInfo = bonusDebitCard.getBalanceInfo();
         Assertions.assertFalse(resultOfPayOperation1);
         Assertions.assertTrue(resultOfPayOperation2);
         Assertions.assertEquals(bonusDebitCard.getBonusPoints(), new BigDecimal("100.000"));

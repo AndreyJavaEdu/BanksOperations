@@ -20,10 +20,9 @@ class CashBackDebitCardTest {
     }
 
     @Test
-    void getAvailableFundsInfo() {
+    void getAvailableFundsInfo_haveValuesForKeysOfMapAndMethodReturnNotNull() {
         var availableFundsInfo = cashBackDebitCard.getAvailableFundsInfo();
         Assertions.assertNotNull(availableFundsInfo);
-        Assertions.assertTrue(availableFundsInfo instanceof Map<String, BigDecimal>);
         Assertions.assertEquals(availableFundsInfo.get("Баланс на дебетовой карте с кэшбэком"), new BigDecimal("20000"));
     }
 }

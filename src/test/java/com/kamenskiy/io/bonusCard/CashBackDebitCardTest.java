@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.Map;
 
-class BonusCashBackDebitCardTest {
-    BonusCashBackDebitCard cashBackDebitCard = new BonusCashBackDebitCard(BigDecimal.valueOf(20_000));
+class CashBackDebitCardTest {
+    CashBackDebitCard cashBackDebitCard = new CashBackDebitCard(BigDecimal.valueOf(20_000));
 
     @Test
     void pay_returnTrueOrFalseAndReturnCashBack() {

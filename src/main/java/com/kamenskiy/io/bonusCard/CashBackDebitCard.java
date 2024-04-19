@@ -8,10 +8,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BonusCashBackDebitCard extends DebitCard {
+public class CashBackDebitCard extends DebitCard {
     private final int CASH_BACK_PERCENT = 5; // процент кэшбека 1-100 %
 
-    public BonusCashBackDebitCard(BigDecimal balance) {
+    public CashBackDebitCard(BigDecimal balance) {
         super(balance);
     }
 

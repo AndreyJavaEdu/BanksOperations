@@ -66,7 +66,7 @@ public class CreditCard extends BankCard {
     public Map<String, BigDecimal> getAvailableFundsInfo() {
         Map<String, BigDecimal>  availableFunds= new HashMap<>();
         availableFunds.put("Баланс, включающий только собственные средства", balance);
-        availableFunds.put("Основные средства, включающие собственные и кредитные средства",new BigDecimal(getBalanceInfo()));
+        availableFunds.put("Основные средства, включающие собственные и кредитные средства",getBalanceInfo());
         availableFunds.put("Кредитный лимит данной кредитной карты", CREDIT_LIMIT);
         return Collections.unmodifiableMap(availableFunds);
     }

@@ -3,6 +3,9 @@ package com.kamenskiy.io.bonusCard;
 import com.kamenskiy.io.CreditCard;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 public class CashBackCreditCard extends CreditCard {
@@ -33,7 +36,37 @@ public class CashBackCreditCard extends CreditCard {
 
     @Override
     public boolean pay(BigDecimal amount) {
-        return super.pay(amount);
+        getCREDIT_LIMIT();
+        if (balance.compareTo(amount) >= 0) {
+            if (amount.compareTo(BigDecimal.valueOf(5000)) > 0) {
+                var cashBack = getCashBack(amount);
+                balance = balance.subtract(amount).add(cashBack);
+            }
+        } else {
+            var remainingDebt = amount.subtract(balance);
+            if (creditPart.compareTo(remainingDebt) >= 0) {
+                creditPart = creditPart.subtract(remainingDebt);
+                balance = BigDecimal.ZERO;
+                //возврат кэшбэка
+                if (amount.compareTo(BigDecimal.valueOf(5000)) > 0) {
+                    var cashBack = getCashBack(amount);
+                    var difLimitCreditPart = getCREDIT_LIMIT().subtract(creditPart);
+                    if (cashBack.compareTo(difLimitCreditPart) >= 0) {
+                        creditPart = getCREDIT_LIMIT();
+                        balance = balance.add(cashBack.subtract(difLimitCreditPart));
+                    } else creditPart = creditPart.add(cashBack);
+                }
+            } else {
+                return false; // Недостаточно средств и кредитной части
+            }
+        }
+        return true; // Успешное списание средств
+    }
+
+    private BigDecimal getCashBack(BigDecimal amount) {
+        return amount
+                .multiply(BigDecimal.valueOf(CASH_BACK_PERCENT)
+                        .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_DOWN));
     }
 
     @Override
@@ -43,6 +76,12 @@ public class CashBackCreditCard extends CreditCard {
 
     @Override
     public Map<String, BigDecimal> getAvailableFundsInfo() {
-        return super.getAvailableFundsInfo();
+        Map<String, BigDecimal> availableFunds = new HashMap<>();
+        availableFunds.put("Баланс, включающий только собственные средства", balance);
+        availableFunds.put("Доступная кредитная часть", getCreditPart());
+        availableFunds.put("Основные средства, включающие собственные и кредитные средства", getBalanceInfo());
+        availableFunds.put("Кредитный лимит данной кредитной карты", getCREDIT_LIMIT());
+        availableFunds.put("Процент кэшбэка от суммы затрат более 5000", BigDecimal.valueOf(CASH_BACK_PERCENT));
+        return Collections.unmodifiableMap(availableFunds);
     }
 }

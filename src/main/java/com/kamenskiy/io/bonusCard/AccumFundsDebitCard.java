@@ -8,9 +8,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AccumFundsDebitCard  extends DebitCard {
+public class AccumFundsDebitCard extends DebitCard {
     private final double ACCUM_PERCENT = 0.005;
     private BigDecimal accumFunds;
+
     public AccumFundsDebitCard(BigDecimal balance) {
         super(balance);
     }

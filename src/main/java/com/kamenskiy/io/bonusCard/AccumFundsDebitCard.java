@@ -12,10 +12,6 @@ public class AccumFundsDebitCard extends DebitCard {
     private final double ACCUM_PERCENT = 0.005;
     private BigDecimal accumFunds;
 
-    public AccumFundsDebitCard(BigDecimal balance) {
-        super(balance);
-    }
-
     public AccumFundsDebitCard(BigDecimal balance, BigDecimal accumFunds) {
         super(balance);
         this.accumFunds = accumFunds;
@@ -43,7 +39,7 @@ public class AccumFundsDebitCard extends DebitCard {
     }
 
     private BigDecimal getAccumFundsOfAmount(BigDecimal amount) {
-        return amount.multiply(BigDecimal.valueOf(ACCUM_PERCENT).divide(BigDecimal.valueOf(100), 5, RoundingMode.HALF_DOWN));
+        return amount.multiply(BigDecimal.valueOf(ACCUM_PERCENT).divide(BigDecimal.valueOf(100), 6, RoundingMode.HALF_DOWN));
     }
 
 

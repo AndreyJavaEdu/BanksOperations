@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class CreditCard extends BankCard {
     private final BigDecimal CREDIT_LIMIT;
-    private BigDecimal creditPart;
+    protected BigDecimal creditPart;
 
     public CreditCard(BigDecimal balance, BigDecimal CREDIT_LIMIT) {
         super(balance);

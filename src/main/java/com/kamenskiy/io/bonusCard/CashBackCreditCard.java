@@ -10,9 +10,16 @@ import java.util.Map;
 
 public class CashBackCreditCard extends CreditCard {
     private final int CASH_BACK_PERCENT = 5; // процент кэшбека 1-100 %
+    private BigDecimal allCashBack;
+
+
+    public BigDecimal getAllCashBack() {
+        return allCashBack;
+    }
 
     public CashBackCreditCard(BigDecimal balance, BigDecimal CREDIT_LIMIT) {
         super(balance, CREDIT_LIMIT);
+        allCashBack = BigDecimal.ZERO;
     }
 
     public int getCASH_BACK_PERCENT() {
@@ -40,6 +47,7 @@ public class CashBackCreditCard extends CreditCard {
         if (balance.compareTo(amount) >= 0) {
             if (amount.compareTo(BigDecimal.valueOf(5000)) > 0) {
                 var cashBack = getCashBack(amount);
+                allCashBack = allCashBack.add(cashBack);
                 balance = balance.subtract(amount).add(cashBack);
             }
         } else {
@@ -50,6 +58,7 @@ public class CashBackCreditCard extends CreditCard {
                 //возврат кэшбэка
                 if (amount.compareTo(BigDecimal.valueOf(5000)) > 0) {
                     var cashBack = getCashBack(amount);
+                    allCashBack = allCashBack.add(cashBack);
                     var difLimitCreditPart = getCREDIT_LIMIT().subtract(creditPart);
                     if (cashBack.compareTo(difLimitCreditPart) >= 0) {
                         creditPart = getCREDIT_LIMIT();
@@ -66,7 +75,7 @@ public class CashBackCreditCard extends CreditCard {
     private BigDecimal getCashBack(BigDecimal amount) {
         return amount
                 .multiply(BigDecimal.valueOf(CASH_BACK_PERCENT)
-                        .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_DOWN));
+                        .divide(BigDecimal.valueOf(100), 3, RoundingMode.HALF_DOWN));
     }
 
     @Override
@@ -82,6 +91,7 @@ public class CashBackCreditCard extends CreditCard {
         availableFunds.put("Основные средства, включающие собственные и кредитные средства", getBalanceInfo());
         availableFunds.put("Кредитный лимит данной кредитной карты", getCREDIT_LIMIT());
         availableFunds.put("Процент кэшбэка от суммы затрат более 5000", BigDecimal.valueOf(CASH_BACK_PERCENT));
+        availableFunds.put("сумма всего кэшбэка", allCashBack);
         return Collections.unmodifiableMap(availableFunds);
     }
 }

@@ -12,8 +12,9 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CashBackCreditCardTest {
-private static final Logger LOGGER = LoggerFactory.getLogger(CashBackCreditCardTest.class);
-CashBackCreditCard creditCard = new CashBackCreditCard(BigDecimal.valueOf(10_000), BigDecimal.valueOf(5000));
+    private static final Logger LOGGER = LoggerFactory.getLogger(CashBackCreditCardTest.class);
+    CashBackCreditCard creditCard = new CashBackCreditCard(BigDecimal.valueOf(10_000), BigDecimal.valueOf(5000));
+
     @Test
     void pay_whenAmountLessThanBalanceReturnCashBackToBalance() {
         //given
@@ -29,8 +30,9 @@ CashBackCreditCard creditCard = new CashBackCreditCard(BigDecimal.valueOf(10_000
         LOGGER.info("Кредитная часть: {}", creditCard.getCreditPart());
         Assertions.assertEquals(creditCard.getCREDIT_LIMIT(), BigDecimal.valueOf(5000));
     }
+
     @Test
-    void pay_cashBackReturnsToCreditPartFirstWhenBalanceIsZero(){
+    void pay_cashBackReturnsToCreditPartFirstWhenBalanceIsZero() {
         LOGGER.info("Кредитная часть была: {}", creditCard.getCreditPart());
         creditCard.pay(BigDecimal.valueOf(12000));
         LOGGER.info("Доступная кредитная часть стала: {}", creditCard.getCreditPart());

@@ -7,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CashBackCreditCardTest {
 private static final Logger LOGGER = LoggerFactory.getLogger(CashBackCreditCardTest.class);
@@ -37,6 +40,13 @@ CashBackCreditCard creditCard = new CashBackCreditCard(BigDecimal.valueOf(10_000
     }
 
     @Test
-    void getAvailableFundsInfo() {
+    void getAvailableFundsInfo_returnThatResultIsImmutableAndHaveKeysAndHaveValueWithFullBalance() {
+        Map<String, BigDecimal> fundsInfo = creditCard.getAvailableFundsInfo();
+        creditCard.pay(BigDecimal.valueOf(1000));
+        assertThat(fundsInfo).isNotNull();
+        assertThat(fundsInfo).containsKey("Сумма всего кэшбэка");
+        Map.Entry<String, BigDecimal> entry;
+        assertThat(fundsInfo).containsEntry("Основные средства, включающие собственные и кредитные средства", creditCard.getBalanceInfo());
+        assertThat(fundsInfo).isUnmodifiable();
     }
 }

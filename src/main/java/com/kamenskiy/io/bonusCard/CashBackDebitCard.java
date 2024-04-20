@@ -10,6 +10,15 @@ import java.util.Map;
 
 public class CashBackDebitCard extends DebitCard {
     private final int CASH_BACK_PERCENT = 5; // процент кэшбека 1-100 %
+    private BigDecimal allCashBack;
+
+    public BigDecimal getAllCashBack() {
+        return allCashBack;
+    }
+
+    public void setAllCashBack(BigDecimal allCashBack) {
+        this.allCashBack = allCashBack;
+    }
 
     public CashBackDebitCard(BigDecimal balance) {
         super(balance);
@@ -24,6 +33,7 @@ public class CashBackDebitCard extends DebitCard {
         if (amount.compareTo(balance) <= 0) {
             if (amount.compareTo(BigDecimal.valueOf(5000)) > 0) {
                 BigDecimal cashBack = getCashBack(amount);
+                allCashBack = allCashBack.add(cashBack);
                 balance = balance
                         .subtract(amount)
                         .add(cashBack);

@@ -4,6 +4,7 @@ import com.kamenskiy.io.CreditCard;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,8 +12,10 @@ public class BonusCreditCard extends CreditCard {
     private double bonusPointsRate; //процентная ставка по которой расчитываются бонусные баллы
     private BigDecimal bonusPoints; //количество бонусных баллов
 
-    public BonusCreditCard(BigDecimal balance, BigDecimal CREDIT_LIMIT) {
+    public BonusCreditCard(BigDecimal balance, BigDecimal CREDIT_LIMIT, double bonusPointsRate, BigDecimal bonusPoints) {
         super(balance, CREDIT_LIMIT);
+        this.bonusPointsRate = bonusPointsRate;
+        this.bonusPoints = bonusPoints;
     }
 
     public double getBonusPointsRate() {
@@ -53,6 +56,6 @@ public class BonusCreditCard extends CreditCard {
         availableFunds.put("Кредитный лимит данной кредитной карты", getCREDIT_LIMIT());
         availableFunds.put("Процентная ставка бонусных баллов:", BigDecimal.valueOf(bonusPointsRate));
         availableFunds.put("Количество бонусных баллов", bonusPoints);
-        return availableFunds;
+        return Collections.unmodifiableMap(availableFunds);
     }
 }

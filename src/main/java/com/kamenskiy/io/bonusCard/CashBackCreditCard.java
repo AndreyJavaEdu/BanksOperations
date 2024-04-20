@@ -91,7 +91,7 @@ public class CashBackCreditCard extends CreditCard {
         availableFunds.put("Основные средства, включающие собственные и кредитные средства", getBalanceInfo());
         availableFunds.put("Кредитный лимит данной кредитной карты", getCREDIT_LIMIT());
         availableFunds.put("Процент кэшбэка от суммы затрат более 5000", BigDecimal.valueOf(CASH_BACK_PERCENT));
-        availableFunds.put("сумма всего кэшбэка", allCashBack);
+        availableFunds.put("Сумма всего кэшбэка", allCashBack);
         return Collections.unmodifiableMap(availableFunds);
     }
 }

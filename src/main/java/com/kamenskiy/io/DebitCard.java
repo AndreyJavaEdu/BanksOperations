@@ -11,7 +11,7 @@ public class DebitCard extends BankCard {
     }
 
     @Override
-    public void putMoney(BigDecimal amount) {
+    protected void putMoney(BigDecimal amount) {
         if (balance.compareTo(BigDecimal.ZERO) >= 0) {
             balance = balance.add(amount);
             System.out.println("Пополнение денежных средств на сумму: " + amount);
@@ -19,7 +19,7 @@ public class DebitCard extends BankCard {
     }
 
     @Override
-    public boolean pay(BigDecimal amount) {
+    protected boolean pay(BigDecimal amount) {
         if (amount.compareTo(balance) <= 0) {
             balance = balance.subtract(amount, new MathContext(3));
             return true;
@@ -28,13 +28,13 @@ public class DebitCard extends BankCard {
     }
 
     @Override
-    public BigDecimal getBalanceInfo() {
+    protected BigDecimal getBalanceInfo() {
         System.out.println("Доступные денежные средства: " + balance);
         return balance;
     }
 
     @Override
-    public Map<String, BigDecimal> getAvailableFundsInfo() {
+    protected Map<String, BigDecimal> getAvailableFundsInfo() {
         return Collections.singletonMap("Баланс:", balance);
     }
 }

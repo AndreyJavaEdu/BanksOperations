@@ -23,7 +23,7 @@ class CashBackCreditCardTest {
         //then
         Assertions.assertTrue(result2);
         Assertions.assertFalse(result1);
-        LOGGER.info(creditCard.getAllCashBack().toString());
+        LOGGER.info("Кэшбэк от величины оплаты: {}", creditCard.getAllCashBack().toString());
         LOGGER.info("Баланс с возвращенным кэшбэком: {}", creditCard.getBalance());
         Assertions.assertNotNull(creditCard.getAllCashBack());
         Assertions.assertEquals(creditCard.getAllCashBack(), new BigDecimal("300.000"));

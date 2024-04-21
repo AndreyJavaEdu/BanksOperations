@@ -32,8 +32,8 @@ public class CashBackCreditCard extends CreditCard {
     }
 
     @Override
-    public BigDecimal getCREDIT_LIMIT() {
-        return super.getCREDIT_LIMIT();
+    public BigDecimal getCreditLimit() {
+        return super.getCreditLimit();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class CashBackCreditCard extends CreditCard {
 
     @Override
     public boolean pay(BigDecimal amount) {
-        getCREDIT_LIMIT();
+        getCreditLimit();
         if (balance.compareTo(amount) >= 0) {
             if (amount.compareTo(BigDecimal.valueOf(5000)) > 0) {
                 var cashBack = getCashBack(amount);
@@ -59,9 +59,9 @@ public class CashBackCreditCard extends CreditCard {
                 if (amount.compareTo(BigDecimal.valueOf(5000)) > 0) {
                     var cashBack = getCashBack(amount);
                     allCashBack = allCashBack.add(cashBack);
-                    var difLimitCreditPart = getCREDIT_LIMIT().subtract(creditPart);
+                    var difLimitCreditPart = getCreditLimit().subtract(creditPart);
                     if (cashBack.compareTo(difLimitCreditPart) >= 0) {
-                        creditPart = getCREDIT_LIMIT();
+                        creditPart = getCreditLimit();
                         balance = balance.add(cashBack.subtract(difLimitCreditPart));
                     } else creditPart = creditPart.add(cashBack);
                 }
@@ -89,7 +89,7 @@ public class CashBackCreditCard extends CreditCard {
         availableFunds.put("Баланс, включающий только собственные средства", balance);
         availableFunds.put("Доступная кредитная часть", getCreditPart());
         availableFunds.put("Основные средства, включающие собственные и кредитные средства", getBalanceInfo());
-        availableFunds.put("Кредитный лимит данной кредитной карты", getCREDIT_LIMIT());
+        availableFunds.put("Кредитный лимит данной кредитной карты", getCreditLimit());
         availableFunds.put("Процент кэшбэка от суммы затрат более 5000", BigDecimal.valueOf(CASH_BACK_PERCENT));
         availableFunds.put("Сумма всего кэшбэка", allCashBack);
         return Collections.unmodifiableMap(availableFunds);

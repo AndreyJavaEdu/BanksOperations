@@ -53,7 +53,7 @@ public class BonusCreditCard extends CreditCard {
         Map<String, BigDecimal> availableFunds = new HashMap<>();
         availableFunds.put("Баланс, включающий только собственные средства", balance);
         availableFunds.put("Основные средства, включающие собственные и кредитные средства", getBalanceInfo());
-        availableFunds.put("Кредитный лимит данной кредитной карты", getCREDIT_LIMIT());
+        availableFunds.put("Кредитный лимит данной кредитной карты", getCreditLimit());
         availableFunds.put("Процентная ставка бонусных баллов:", BigDecimal.valueOf(bonusPointsRate));
         availableFunds.put("Количество бонусных баллов", bonusPoints);
         return Collections.unmodifiableMap(availableFunds);

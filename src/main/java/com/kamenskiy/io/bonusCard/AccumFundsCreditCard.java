@@ -32,11 +32,11 @@ public class AccumFundsCreditCard extends CreditCard {
 
     @Override
     public void putMoney(BigDecimal amount) {
-        if (creditPart.compareTo(getCREDIT_LIMIT()) == 0) {
+        if (creditPart.compareTo(getCreditLimit()) == 0) {
             balance = balance.add(amount).add(getAccumFundsOfAmount(amount));
             accumFunds = accumFunds.add(getAccumFundsOfAmount(amount));
-        } else if (creditPart.compareTo(getCREDIT_LIMIT()) < 0 && balance.equals(BigDecimal.ZERO)) {
-            var remainingDebt = getCREDIT_LIMIT().subtract(creditPart);
+        } else if (creditPart.compareTo(getCreditLimit()) < 0 && balance.equals(BigDecimal.ZERO)) {
+            var remainingDebt = getCreditLimit().subtract(creditPart);
             accumFunds = accumFunds.add(getAccumFundsOfAmount(amount));
             if (amount.compareTo(remainingDebt) < 0) {
                 creditPart = creditPart.add(remainingDebt).add(getAccumFundsOfAmount(amount));
@@ -61,7 +61,7 @@ public class AccumFundsCreditCard extends CreditCard {
         Map<String, BigDecimal> availableFunds = new HashMap<>();
         availableFunds.put("Баланс, включающий только собственные средства", balance);
         availableFunds.put("Основные средства, включающие собственные и кредитные средства", getBalanceInfo());
-        availableFunds.put("Кредитный лимит данной кредитной карты", getCREDIT_LIMIT());
+        availableFunds.put("Кредитный лимит данной кредитной карты", getCreditLimit());
         availableFunds.put("Действующий процент накопления карты от суммы депозита", BigDecimal.valueOf(ACCUM_PERCENT));
         availableFunds.put("Накопленные средства за все депозиты", accumFunds);
         return Collections.unmodifiableMap(availableFunds);

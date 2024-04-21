@@ -28,7 +28,7 @@ class CashBackCreditCardTest {
         Assertions.assertNotNull(creditCard.getAllCashBack());
         Assertions.assertEquals(creditCard.getAllCashBack(), new BigDecimal("300.000"));
         LOGGER.info("Кредитная часть: {}", creditCard.getCreditPart());
-        Assertions.assertEquals(creditCard.getCREDIT_LIMIT(), BigDecimal.valueOf(5000));
+        Assertions.assertEquals(creditCard.getCreditLimit(), BigDecimal.valueOf(5000));
     }
 
     @Test

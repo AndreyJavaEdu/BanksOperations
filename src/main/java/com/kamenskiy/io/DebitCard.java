@@ -22,8 +22,10 @@ public class DebitCard extends BankCard {
     protected boolean pay(BigDecimal amount) {
         if (amount.compareTo(balance) <= 0) {
             balance = balance.subtract(amount, new MathContext(3));
+            System.out.println("Произведено списание на сумму: "+ amount);
             return true;
         }
+        System.out.println("Недостаточно денежных средств для списания. Пополните баланс.");
         return false;
     }
 
@@ -35,6 +37,6 @@ public class DebitCard extends BankCard {
 
     @Override
     protected Map<String, BigDecimal> getAvailableFundsInfo() {
-        return Collections.singletonMap("Баланс:", balance);
+        return Collections.singletonMap("Баланс", balance);
     }
 }

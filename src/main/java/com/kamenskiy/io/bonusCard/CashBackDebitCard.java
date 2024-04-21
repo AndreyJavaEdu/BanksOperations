@@ -22,6 +22,7 @@ public class CashBackDebitCard extends DebitCard {
 
     public CashBackDebitCard(BigDecimal balance) {
         super(balance);
+        this.allCashBack = BigDecimal.ZERO;
     }
 
     public int getCASH_BACK_PERCENT() {

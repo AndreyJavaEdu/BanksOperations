@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 class CashBackDebitCardTest {
     CashBackDebitCard cashBackDebitCard = new CashBackDebitCard(BigDecimal.valueOf(20_000));
@@ -13,7 +12,7 @@ class CashBackDebitCardTest {
     void pay_returnTrueOrFalseAndReturnCashBack() {
         boolean resultOfPayOperation2 = cashBackDebitCard.pay(BigDecimal.valueOf(100_000));
         boolean resultOfPayOperation3 = cashBackDebitCard.pay(BigDecimal.valueOf(10_000));
-        BigDecimal balanceInfo = cashBackDebitCard.getBalanceInfo();
+        BigDecimal balanceInfo = cashBackDebitCard.getBalance();
         Assertions.assertFalse(resultOfPayOperation2);
         Assertions.assertTrue(resultOfPayOperation3);
         Assertions.assertEquals(balanceInfo, new BigDecimal("10500.00"));

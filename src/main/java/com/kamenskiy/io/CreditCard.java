@@ -24,7 +24,7 @@ public class CreditCard extends BankCard {
     }
 
     @Override
-    public void putMoney(BigDecimal amount) {
+    protected void putMoney(BigDecimal amount) {
         if (creditPart.compareTo(CREDIT_LIMIT) == 0) {
             balance = balance.add(amount);
         } else if (creditPart.compareTo(CREDIT_LIMIT) < 0 && balance.equals(BigDecimal.ZERO)) {
@@ -39,7 +39,7 @@ public class CreditCard extends BankCard {
     }
 
     @Override
-    public boolean pay(BigDecimal amount) {
+    protected boolean pay(BigDecimal amount) {
         if (balance.compareTo(amount) >= 0) {
             balance = balance.subtract(amount);
         } else {
@@ -56,14 +56,14 @@ public class CreditCard extends BankCard {
 
 
     @Override
-    public BigDecimal getBalanceInfo() {
+    protected BigDecimal getBalanceInfo() {
         var fullBalance = balance.add(creditPart);
         System.out.println("Общий баланс кредитной карты с учетом собственных и доступных кредитных средств: " + fullBalance);
         return fullBalance;
     }
 
     @Override
-    public Map<String, BigDecimal> getAvailableFundsInfo() {
+    protected Map<String, BigDecimal> getAvailableFundsInfo() {
         Map<String, BigDecimal>  availableFunds= new HashMap<>();
         availableFunds.put("Баланс, включающий только собственные средства", balance);
         availableFunds.put("Основные средства, включающие собственные и кредитные средства",getBalanceInfo());

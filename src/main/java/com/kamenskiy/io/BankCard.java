@@ -18,11 +18,11 @@ public abstract class BankCard {
         this.balance = balance;
     }
 
-    public abstract void putMoney(BigDecimal amount);
+    protected abstract void putMoney(BigDecimal amount);
 
-    public abstract boolean pay(BigDecimal amount);
+    protected abstract boolean pay(BigDecimal amount);
 
-    public abstract BigDecimal getBalanceInfo();
+    protected abstract BigDecimal getBalanceInfo();
 
-    public abstract Map<String, BigDecimal> getAvailableFundsInfo();
+    protected abstract Map<String, BigDecimal> getAvailableFundsInfo();
 }

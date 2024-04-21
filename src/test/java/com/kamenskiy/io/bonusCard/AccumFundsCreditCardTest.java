@@ -6,6 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class AccumFundsCreditCardTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(AccumFundsCreditCardTest.class);
@@ -25,6 +28,14 @@ class AccumFundsCreditCardTest {
 
     @Test
     void getAvailableFundsInfo() {
-
+        //given
+        creditCard.putMoney(BigDecimal.valueOf(10_000));
+        //when
+        Map<String, BigDecimal> availableFundsInfo = creditCard.getAvailableFundsInfo();
+        //then
+        assertThat(availableFundsInfo).isNotNull();
+        assertThat(availableFundsInfo).containsKey("Действующий процент накопления карты от суммы депозита");
+        assertThat(availableFundsInfo).isUnmodifiable();
+        assertThat(availableFundsInfo).containsEntry("Накопленные средства за все депозиты", creditCard.getAccumFunds());
     }
 }

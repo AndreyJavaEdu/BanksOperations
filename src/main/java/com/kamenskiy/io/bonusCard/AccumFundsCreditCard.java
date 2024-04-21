@@ -29,6 +29,7 @@ public class AccumFundsCreditCard extends CreditCard {
         this.accumFunds = accumFunds;
     }
 
+
     @Override
     public void putMoney(BigDecimal amount) {
         if (creditPart.compareTo(getCREDIT_LIMIT()) == 0) {

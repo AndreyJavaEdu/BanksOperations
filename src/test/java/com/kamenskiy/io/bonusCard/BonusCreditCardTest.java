@@ -12,15 +12,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 class BonusCreditCardTest {
-BonusCreditCard creditCard = new BonusCreditCard(BigDecimal.valueOf(10_000), BigDecimal.valueOf(5_000), 1, BigDecimal.ZERO);
-private static final Logger LOGGER = LoggerFactory.getLogger(BonusCreditCardTest.class);
+    BonusCreditCard creditCard = new BonusCreditCard(BigDecimal.valueOf(10_000), BigDecimal.valueOf(5_000), 1, BigDecimal.ZERO);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BonusCreditCardTest.class);
+
     @Test
     void pay_haveBonusPoints() {
         creditCard.pay(BigDecimal.valueOf(5000));
         LOGGER.info("Количество бонусных баллов: {}", creditCard.getBonusPoints());
         Assertions.assertNotNull(creditCard.getBonusPoints());
     }
-@Test
+
+    @Test
     void pay_bonusPointsIncreasedAndMethodReturnTrue() {
         boolean resultPay1 = creditCard.pay(BigDecimal.valueOf(5000));
         boolean resultPay2 = creditCard.pay(BigDecimal.valueOf(5000));

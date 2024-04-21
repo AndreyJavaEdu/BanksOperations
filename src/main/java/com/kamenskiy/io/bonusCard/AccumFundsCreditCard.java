@@ -4,6 +4,8 @@ import com.kamenskiy.io.CreditCard;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 public class AccumFundsCreditCard extends CreditCard {
@@ -55,6 +57,12 @@ public class AccumFundsCreditCard extends CreditCard {
 
     @Override
     public Map<String, BigDecimal> getAvailableFundsInfo() {
-        return super.getAvailableFundsInfo();
+        Map<String, BigDecimal> availableFunds = new HashMap<>();
+        availableFunds.put("Баланс, включающий только собственные средства", balance);
+        availableFunds.put("Основные средства, включающие собственные и кредитные средства", getBalanceInfo());
+        availableFunds.put("Кредитный лимит данной кредитной карты", getCREDIT_LIMIT());
+        availableFunds.put("Действующий процент накопления карты от суммы депозита", BigDecimal.valueOf(ACCUM_PERCENT));
+        availableFunds.put("Накопленные средства за все депозиты", accumFunds);
+        return Collections.unmodifiableMap(availableFunds);
     }
 }

@@ -5,7 +5,7 @@ import com.kamenskiy.io.bonusCard.*;
 import java.math.BigDecimal;
 import java.util.Map;
 
-public class Main {
+public class BankCardsApplication {
     public static void main(String[] args) {
         System.out.println("Создание экземляра класса DebitCard с начальным балансом 10_000 и проверка его методов");
         BankCard debitCard = new DebitCard(BigDecimal.valueOf(10_000));

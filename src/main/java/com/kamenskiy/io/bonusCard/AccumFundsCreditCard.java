@@ -26,8 +26,7 @@ public class AccumFundsCreditCard extends CreditCard {
         if (creditPart.compareTo(getCreditLimit()) == 0) {
             balance = balance.add(amount).add(getAccumFundsOfAmount(amount));
             accumFunds = accumFunds.add(getAccumFundsOfAmount(amount));
-        }
-        else if (creditPart.compareTo(getCreditLimit()) < 0) {
+        } else if (creditPart.compareTo(getCreditLimit()) < 0) {
             var remainingDebt = getCreditLimit().subtract(creditPart);
             accumFunds = accumFunds.add(getAccumFundsOfAmount(amount));
             if (amount.compareTo(remainingDebt) < 0) {
@@ -66,7 +65,6 @@ public class AccumFundsCreditCard extends CreditCard {
     private BigDecimal getAccumFundsOfAmount(BigDecimal amount) {
         return amount.multiply(BigDecimal.valueOf(ACCUM_PERCENT).divide(BigDecimal.valueOf(100), 6, RoundingMode.HALF_DOWN));
     }
-
 
     @Override
     public Map<String, BigDecimal> getAvailableFundsInfo() {

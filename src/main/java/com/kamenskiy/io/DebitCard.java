@@ -1,7 +1,6 @@
 package com.kamenskiy.io;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.Map;
 

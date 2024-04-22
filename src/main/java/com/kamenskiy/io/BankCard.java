@@ -11,15 +11,15 @@ public abstract class BankCard {
         return balance.setScale(3, RoundingMode.HALF_DOWN);
     }
 
-    public BankCard(BigDecimal balance) {
+    BankCard(BigDecimal balance) {
         this.balance = balance;
     }
 
-    protected abstract void putMoney(BigDecimal amount);
+    abstract void putMoney(BigDecimal amount);
 
-    protected abstract boolean pay(BigDecimal amount);
+    abstract boolean pay(BigDecimal amount);
 
-    protected abstract BigDecimal getBalanceInfo();
+    abstract BigDecimal getBalanceInfo();
 
-    protected abstract Map<String, BigDecimal> getAvailableFundsInfo();
+    abstract Map<String, BigDecimal> getAvailableFundsInfo();
 }

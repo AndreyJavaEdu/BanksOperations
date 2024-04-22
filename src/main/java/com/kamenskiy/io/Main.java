@@ -22,7 +22,7 @@ public class Main {
 
         System.out.println("Создание экземляра класса BonusDebitCard с начальным балансом 0, " +
                 "процентной ставкой бонусных баллов 1%");
-        BankCard bonusDebitCard = new BonusDebitCard(BigDecimal.ZERO,1, BigDecimal.ZERO);
+        BankCard bonusDebitCard = new BonusDebitCard(BigDecimal.ZERO, 1, BigDecimal.ZERO);
         startOperationsWithCard(bonusDebitCard);
         System.out.println();
 
@@ -37,6 +37,12 @@ public class Main {
         startOperationsWithCard(cashBackDebitCard);
         System.out.println();
 
+        System.out.println("Создание экземляра класса BonusCreditCard с начальным балансом 0, " +
+                "кредитным лимитом 6000, процентной ставкой бонусных баллов = 1% и " +
+                "начальным количеством бонусных баллов = 0");
+        BankCard bonusCreditCard = new BonusCreditCard(BigDecimal.ZERO, BigDecimal.valueOf(6000), 1, BigDecimal.ZERO);
+        startOperationsWithCard(bonusCreditCard);
+        System.out.println();
 
 
     }
@@ -44,7 +50,7 @@ public class Main {
     private static void startOperationsWithCard(BankCard card) {
         System.out.println("--------------------------------------------------------------------------------------------");
         System.out.println("Начало работы метода пополнения баланса - putMoney()");
-        card.putMoney(BigDecimal.valueOf(5000));
+        card.putMoney(BigDecimal.valueOf(10000));
         System.out.println("Окончание работы метода пополнения баланса - putMoney()");
         System.out.println("Баланс карты после пополнения: " + card.getBalance());
         System.out.println();

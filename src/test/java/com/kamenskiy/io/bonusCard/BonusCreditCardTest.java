@@ -42,9 +42,9 @@ class BonusCreditCardTest {
         Map<String, BigDecimal> availableFundsInfo = creditCard.getAvailableFundsInfo();
 //        then
         assertThat(availableFundsInfo).isNotNull();
-        assertThat(availableFundsInfo).containsKey("Количество бонусных баллов");
+        assertThat(availableFundsInfo).containsKey("Количество начисленных бонусных баллов");
         assertThat(availableFundsInfo).isUnmodifiable();
-        assertThat(availableFundsInfo).containsEntry("Количество бонусных баллов", creditCard.getBonusPoints());
+        assertThat(availableFundsInfo).containsEntry("Количество начисленных бонусных баллов", creditCard.getBonusPoints());
 
     }
 }

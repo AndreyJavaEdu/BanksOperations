@@ -1,9 +1,6 @@
 package com.kamenskiy.io;
 
-import com.kamenskiy.io.bonusCard.AccumFundsDebitCard;
-import com.kamenskiy.io.bonusCard.BonusCreditCard;
-import com.kamenskiy.io.bonusCard.BonusDebitCard;
-import com.kamenskiy.io.bonusCard.CashBackDebitCard;
+import com.kamenskiy.io.bonusCard.*;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -44,12 +41,16 @@ public class Main {
         startOperationsWithCard(bonusCreditCard);
         System.out.println();
 
-
+        System.out.println("Создание экземляра класса AccumFundsDebitCard с начальным балансом 0 и кредитным лимитом 5000");
+        BankCard accumFundsCreditCard = new AccumFundsCreditCard(BigDecimal.ZERO, BigDecimal.valueOf(5000));
+        startOperationsWithCard(accumFundsCreditCard);
+        System.out.println();
     }
 
     private static void startOperationsWithCard(BankCard card) {
         System.out.println("--------------------------------------------------------------------------------------------");
         System.out.println("Начало работы метода пополнения баланса - putMoney()");
+        System.out.println("Баланс или собственные средства до пополнения: " + card.getBalance());
         card.putMoney(BigDecimal.valueOf(10000));
         System.out.println("Окончание работы метода пополнения баланса - putMoney()");
         System.out.println("Баланс карты после пополнения: " + card.getBalance());

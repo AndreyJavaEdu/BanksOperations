@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CashBackCreditCard extends CreditCard {
-    private final int CASH_BACK_PERCENT = 5; // процент кэшбека 1-100 %
+    private static final int CASH_BACK_PERCENT = 5; // процент кэшбека 1-100 %
+    public static final int MIN_SPEND_FOR_CASHBACK = 5000;
     private BigDecimal allCashBack;
 
 
@@ -20,10 +21,6 @@ public class CashBackCreditCard extends CreditCard {
     public CashBackCreditCard(BigDecimal balance, BigDecimal CREDIT_LIMIT) {
         super(balance, CREDIT_LIMIT);
         allCashBack = BigDecimal.ZERO;
-    }
-
-    public int getCASH_BACK_PERCENT() {
-        return CASH_BACK_PERCENT;
     }
 
     @Override
@@ -43,33 +40,29 @@ public class CashBackCreditCard extends CreditCard {
 
     @Override
     public boolean pay(BigDecimal amount) {
-        getCreditLimit();
         if (balance.compareTo(amount) >= 0) {
-            if (amount.compareTo(BigDecimal.valueOf(5000)) > 0) {
+            if (amount.compareTo(BigDecimal.valueOf(MIN_SPEND_FOR_CASHBACK)) > 0) {
                 var cashBack = getCashBack(amount);
                 allCashBack = allCashBack.add(cashBack);
                 balance = balance.subtract(amount).add(cashBack);
             }
-        } else {
-            var remainingDebt = amount.subtract(balance);
-            if (creditPart.compareTo(remainingDebt) >= 0) {
-                creditPart = creditPart.subtract(remainingDebt);
-                balance = BigDecimal.ZERO;
-                //возврат кэшбэка
-                if (amount.compareTo(BigDecimal.valueOf(5000)) > 0) {
-                    var cashBack = getCashBack(amount);
-                    allCashBack = allCashBack.add(cashBack);
-                    var difLimitCreditPart = getCreditLimit().subtract(creditPart);
-                    if (cashBack.compareTo(difLimitCreditPart) >= 0) {
-                        creditPart = getCreditLimit();
-                        balance = balance.add(cashBack.subtract(difLimitCreditPart));
-                    } else creditPart = creditPart.add(cashBack);
-                }
-            } else {
-                return false; // Недостаточно средств и кредитной части
-            }
+            return true;
         }
-        return true; // Успешное списание средств
+        var remainingDebt = amount.subtract(balance);
+        if (creditPart.compareTo(remainingDebt) < 0) {
+            return false; // Недостаточно средств и кредитной части
+        }
+        balance = BigDecimal.ZERO;
+        creditPart = creditPart.subtract(remainingDebt);
+        if (amount.compareTo(BigDecimal.valueOf(MIN_SPEND_FOR_CASHBACK)) > 0) {
+            BigDecimal cashBack = getCashBack(amount);
+            allCashBack = allCashBack.add(cashBack);
+            var difLimitCreditPart = getCreditLimit().subtract(creditPart);
+            boolean cashBackExceedsLimit = cashBack.compareTo(difLimitCreditPart) >= 0;
+            creditPart = cashBackExceedsLimit ? getCreditLimit() : creditPart.add(cashBack);
+            balance = cashBackExceedsLimit ? balance.add(cashBack.subtract(difLimitCreditPart)) : balance;
+        }
+        return true;
     }
 
     private BigDecimal getCashBack(BigDecimal amount) {
@@ -86,7 +79,7 @@ public class CashBackCreditCard extends CreditCard {
     @Override
     public Map<String, BigDecimal> getAvailableFundsInfo() {
         Map<String, BigDecimal> availableFunds = new HashMap<>();
-        availableFunds.put("Баланс, включающий только собственные средства", balance);
+        availableFunds.put("Баланс, включающий только собственные средства", getBalance());
         availableFunds.put("Доступная кредитная часть", getCreditPart());
         availableFunds.put("Основные средства, включающие собственные и кредитные средства", getBalanceInfo());
         availableFunds.put("Кредитный лимит данной кредитной карты", getCreditLimit());

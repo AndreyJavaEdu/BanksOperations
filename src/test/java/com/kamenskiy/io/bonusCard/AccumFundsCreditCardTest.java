@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class AccumFundsCreditCardTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(AccumFundsCreditCardTest.class);
-    AccumFundsCreditCard creditCard = new AccumFundsCreditCard(BigDecimal.ZERO, BigDecimal.valueOf(5000), BigDecimal.ZERO);
+    AccumFundsCreditCard creditCard = new AccumFundsCreditCard(BigDecimal.ZERO, BigDecimal.valueOf(5000));
 
     @Test
     void putMoney_increaseBalanceWhenDepositOnAccumFunds() {

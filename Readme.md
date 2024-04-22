@@ -3,7 +3,7 @@
 Запуск приложения производится с помощью класса с методом main() - [BankCardsApplication.java](src%2Fmain%2Fjava%2Fcom%2Fkamenskiy%2Fio%2FBankCardsApplication.java).
 Уделено внимание юнит тестированию каждого из методов в классах.
 Проанализированы модификаторы доступа полей классов и самих методов. В базовом классе [BankCard.java](src%2Fmain%2Fjava%2Fcom%2Fkamenskiy%2Fio%2FBankCard.java) 
-методы имеют модификатор доступа default (package private), в тоже время поле balance имеет модификатор доступа protected для доступа к нему в классых наследниках 
+методы имеют модификатор доступа default (package private), в то же время поле balance имеет модификатор доступа protected для доступа к нему в классых наследниках 
 [CreditCard.java](src%2Fmain%2Fjava%2Fcom%2Fkamenskiy%2Fio%2FCreditCard.java) и [DebitCard.java](src%2Fmain%2Fjava%2Fcom%2Fkamenskiy%2Fio%2FDebitCard.java).
 
 Выполнены реализации методов, требующих переопределения в классах наследниках с различными бонусными программами:

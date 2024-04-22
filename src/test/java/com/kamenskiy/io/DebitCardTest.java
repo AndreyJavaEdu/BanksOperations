@@ -20,13 +20,12 @@ class DebitCardTest {
     }
 
     @Test
-    void pay() {
+    void pay_returnBooleanIfBalanceGreaterOrLessThenAmount() {
         //arrange
         DebitCard debitCard = new DebitCard(new BigDecimal("10000.000"));
         //act
         boolean resultPay1 = debitCard.pay(BigDecimal.valueOf(5000));
         boolean resultPay2 = debitCard.pay(BigDecimal.valueOf(20000));
-
         //assert
         assertThat(resultPay1).isEqualTo(true);
         assertThat(resultPay1).isTrue();
@@ -34,7 +33,7 @@ class DebitCardTest {
     }
 
     @Test
-    void getBalanceInfo() {
+    void getBalanceInfo_haveResultOfBalance() {
         //arrange
         DebitCard debitCard = new DebitCard(new BigDecimal("10000.000"));
         DebitCard debitCard2 = new DebitCard(BigDecimal.ZERO);
@@ -44,12 +43,10 @@ class DebitCardTest {
         //assert
         assertThat(resultBalanceInfo).isEqualTo(new BigDecimal("10000.000"));
         assertThat(resultBalanceInfo2).isEqualTo((debitCard2.getBalance()));
-
-
     }
 
     @Test
-    void getAvailableFundsInfo() {
+    void getAvailableFundsInfo_haveKeyAndHaveEntry() {
         //arrange
         DebitCard debitCard = new DebitCard(new BigDecimal("10000.000"));
         //act
@@ -57,5 +54,6 @@ class DebitCardTest {
         //assert
         assertThat(fundsInfo).isNotNull();
         assertThat(fundsInfo).containsEntry("Баланс", debitCard.getBalance());
+        assertThat(fundsInfo).isUnmodifiable();
     }
 }

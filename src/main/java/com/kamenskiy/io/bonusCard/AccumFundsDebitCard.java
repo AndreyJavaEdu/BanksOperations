@@ -25,7 +25,7 @@ public class AccumFundsDebitCard extends DebitCard {
     public void putMoney(BigDecimal amount) {
         if (balance.compareTo(BigDecimal.ZERO) >= 0) {
             accumFunds = accumFunds.add(getAccumFundsOfAmount(amount));
-            System.out.println("Сумма накопления от депозита: "+ getAccumFundsOfAmount(amount));
+            System.out.println("Сумма накопления от депозита: " + getAccumFundsOfAmount(amount));
             balance = balance.add(amount).add(getAccumFundsOfAmount(amount));
             System.out.println("Пополнение денежных средств на сумму: " + amount);
         }
@@ -34,7 +34,6 @@ public class AccumFundsDebitCard extends DebitCard {
     private BigDecimal getAccumFundsOfAmount(BigDecimal amount) {
         return amount.multiply(BigDecimal.valueOf(ACCUM_PERCENT).divide(BigDecimal.valueOf(100), 6, RoundingMode.HALF_DOWN));
     }
-
 
     @Override
     public Map<String, BigDecimal> getAvailableFundsInfo() {

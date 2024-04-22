@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BonusCreditCard extends CreditCard {
-    private double bonusPointsRate; //процентная ставка по которой расчитываются бонусные баллы
+    private final double bonusPointsRate; //процентная ставка по которой расчитываются бонусные баллы
     private BigDecimal bonusPoints; //количество бонусных баллов
 
     public BonusCreditCard(BigDecimal balance, BigDecimal CREDIT_LIMIT, double bonusPointsRate, BigDecimal bonusPoints) {
@@ -22,22 +22,15 @@ public class BonusCreditCard extends CreditCard {
         return bonusPointsRate;
     }
 
-    public void setBonusPointsRate(double bonusPointsRate) {
-        this.bonusPointsRate = bonusPointsRate;
-    }
-
     public BigDecimal getBonusPoints() {
         return bonusPoints;
-    }
-
-    public void setBonusPoints(BigDecimal bonusPoints) {
-        this.bonusPoints = bonusPoints;
     }
 
     @Override
     public boolean pay(BigDecimal amount) {
         boolean operationPay = super.pay(amount);
         if (operationPay) {
+            System.out.println("Сумма бонусных баллов за текущую покупку: " + getPointsWhenPay(amount));
             bonusPoints = bonusPoints.add(getPointsWhenPay(amount));
         }
         return operationPay;
@@ -51,11 +44,11 @@ public class BonusCreditCard extends CreditCard {
     @Override
     public Map<String, BigDecimal> getAvailableFundsInfo() {
         Map<String, BigDecimal> availableFunds = new HashMap<>();
-        availableFunds.put("Баланс, включающий только собственные средства", balance);
+        availableFunds.put("Баланс, включающий только собственные средства", getBalance());
         availableFunds.put("Основные средства, включающие собственные и кредитные средства", getBalanceInfo());
-        availableFunds.put("Кредитный лимит данной кредитной карты", getCREDIT_LIMIT());
-        availableFunds.put("Процентная ставка бонусных баллов:", BigDecimal.valueOf(bonusPointsRate));
-        availableFunds.put("Количество бонусных баллов", bonusPoints);
+        availableFunds.put("Кредитный лимит данной кредитной карты", getCreditLimit());
+        availableFunds.put("Процентная ставка бонусных баллов:", BigDecimal.valueOf(getBonusPointsRate()));
+        availableFunds.put("Количество начисленных бонусных баллов", getBonusPoints());
         return Collections.unmodifiableMap(availableFunds);
     }
 }

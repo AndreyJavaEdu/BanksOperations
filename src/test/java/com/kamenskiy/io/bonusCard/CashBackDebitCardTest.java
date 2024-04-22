@@ -15,13 +15,13 @@ class CashBackDebitCardTest {
         BigDecimal balanceInfo = cashBackDebitCard.getBalance();
         Assertions.assertFalse(resultOfPayOperation2);
         Assertions.assertTrue(resultOfPayOperation3);
-        Assertions.assertEquals(balanceInfo, new BigDecimal("10500.00"));
+        Assertions.assertEquals(balanceInfo, new BigDecimal("10500.000"));
     }
 
     @Test
     void getAvailableFundsInfo_haveValuesForKeysOfMapAndMethodReturnNotNull() {
         var availableFundsInfo = cashBackDebitCard.getAvailableFundsInfo();
         Assertions.assertNotNull(availableFundsInfo);
-        Assertions.assertEquals(availableFundsInfo.get("Баланс на дебетовой карте с кэшбэком"), new BigDecimal("20000"));
+        Assertions.assertEquals(availableFundsInfo.get("Баланс на дебетовой карте с зачисленным кэшбэком"), new BigDecimal("20000.000"));
     }
 }

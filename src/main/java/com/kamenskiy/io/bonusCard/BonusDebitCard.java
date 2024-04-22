@@ -9,13 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BonusDebitCard extends DebitCard {
-    private double bonusPointsRate; //процентная ставка по которой расчитываются бонусные баллы
+    private final double bonusPointsRate; //процентная ставка по которой расчитываются бонусные баллы
     private BigDecimal bonusPoints; //количество бонусных баллов
-
-    public BonusDebitCard(BigDecimal balance, BigDecimal bonusPints) {
-        super(balance);
-        this.bonusPoints = bonusPints;
-    }
 
     public BonusDebitCard(BigDecimal balance, double bonusPointsRate, BigDecimal bonusPints) {
         super(balance);
@@ -27,16 +22,8 @@ public class BonusDebitCard extends DebitCard {
         return bonusPoints;
     }
 
-    public void setBonusPoints(BigDecimal bonusPoints) {
-        this.bonusPoints = bonusPoints;
-    }
-
     public double getBonusPointsRate() {
         return bonusPointsRate;
-    }
-
-    public void setBonusPointsRate(double bonusPointsRate) {
-        this.bonusPointsRate = bonusPointsRate;
     }
 
     @Override
@@ -55,7 +42,7 @@ public class BonusDebitCard extends DebitCard {
     @Override
     public Map<String, BigDecimal> getAvailableFundsInfo() {
         Map<String, BigDecimal> availableFunds = new HashMap<>();
-        availableFunds.put("Баланс на дебетовой карте с бонусными балами", balance);
+        availableFunds.put("Баланс на дебетовой карте с бонусными балами", getBalance());
         availableFunds.put("Процентная ставка бонусных баллов", BigDecimal.valueOf(bonusPointsRate));
         availableFunds.put("Количество бонусных баллов", bonusPoints);
         return Collections.unmodifiableMap(availableFunds);

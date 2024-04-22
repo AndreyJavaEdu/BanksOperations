@@ -1,7 +1,7 @@
 package com.kamenskiy.io;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.Map;
 
@@ -21,7 +21,7 @@ public class DebitCard extends BankCard {
     @Override
     protected boolean pay(BigDecimal amount) {
         if (amount.compareTo(balance) <= 0) {
-            balance = balance.subtract(amount, new MathContext(3));
+            balance = balance.subtract(amount);
             System.out.println("Произведено списание на сумму: "+ amount);
             return true;
         }
@@ -31,12 +31,12 @@ public class DebitCard extends BankCard {
 
     @Override
     protected BigDecimal getBalanceInfo() {
-        System.out.println("Доступные денежные средства: " + balance);
-        return balance;
+        System.out.println("Доступные денежные средства: " + getBalance());
+        return getBalance();
     }
 
     @Override
     protected Map<String, BigDecimal> getAvailableFundsInfo() {
-        return Collections.singletonMap("Баланс", balance);
+        return Collections.singletonMap("Баланс", getBalance());
     }
 }

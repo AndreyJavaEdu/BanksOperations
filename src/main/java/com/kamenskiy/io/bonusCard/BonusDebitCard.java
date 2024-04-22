@@ -42,7 +42,7 @@ public class BonusDebitCard extends DebitCard {
     @Override
     public Map<String, BigDecimal> getAvailableFundsInfo() {
         Map<String, BigDecimal> availableFunds = new HashMap<>();
-        availableFunds.put("Баланс на дебетовой карте с бонусными балами", balance);
+        availableFunds.put("Баланс на дебетовой карте с бонусными балами", getBalance());
         availableFunds.put("Процентная ставка бонусных баллов", BigDecimal.valueOf(bonusPointsRate));
         availableFunds.put("Количество бонусных баллов", bonusPoints);
         return Collections.unmodifiableMap(availableFunds);

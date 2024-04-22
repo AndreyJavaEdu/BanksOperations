@@ -15,7 +15,7 @@ class AccumFundsDebitCardTest {
         Assertions.assertEquals(accumDebitCard.getAccumFunds(), new BigDecimal("0.050000"));
         accumDebitCard.putMoney(BigDecimal.valueOf(1000));
         Assertions.assertEquals(accumDebitCard.getAccumFunds(), new BigDecimal("0.100000"));
-        Assertions.assertEquals(accumDebitCard.getBalance(), new BigDecimal("2000.100000"));
+        Assertions.assertEquals(accumDebitCard.getBalance(), new BigDecimal("2000.100"));
     }
 
     @Test

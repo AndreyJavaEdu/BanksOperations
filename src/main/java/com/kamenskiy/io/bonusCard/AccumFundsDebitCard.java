@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AccumFundsDebitCard extends DebitCard {
-    private final double ACCUM_PERCENT = 0.005;
+    private static final double ACCUM_PERCENT = 0.005;
     private BigDecimal accumFunds;
 
     public AccumFundsDebitCard(BigDecimal balance, BigDecimal accumFunds) {
@@ -17,22 +17,15 @@ public class AccumFundsDebitCard extends DebitCard {
         this.accumFunds = accumFunds;
     }
 
-    public double getACCUM_PERCENT() {
-        return ACCUM_PERCENT;
-    }
-
     public BigDecimal getAccumFunds() {
         return accumFunds;
-    }
-
-    public void setAccumFunds(BigDecimal accumFunds) {
-        this.accumFunds = accumFunds;
     }
 
     @Override
     public void putMoney(BigDecimal amount) {
         if (balance.compareTo(BigDecimal.ZERO) >= 0) {
             accumFunds = accumFunds.add(getAccumFundsOfAmount(amount));
+            System.out.println("Сумма накопления от депозита: "+ getAccumFundsOfAmount(amount));
             balance = balance.add(amount).add(getAccumFundsOfAmount(amount));
             System.out.println("Пополнение денежных средств на сумму: " + amount);
         }
@@ -46,7 +39,7 @@ public class AccumFundsDebitCard extends DebitCard {
     @Override
     public Map<String, BigDecimal> getAvailableFundsInfo() {
         Map<String, BigDecimal> availableFunds = new HashMap<>();
-        availableFunds.put("Баланс на дебетовой карте с бонусом накоплений", balance);
+        availableFunds.put("Баланс на дебетовой карте с бонусом накоплений", getBalance());
         availableFunds.put("Действующий процент накопления карты от суммы депозита", BigDecimal.valueOf(ACCUM_PERCENT));
         availableFunds.put("Накопленные средства за все депозиты", accumFunds);
         return Collections.unmodifiableMap(availableFunds);

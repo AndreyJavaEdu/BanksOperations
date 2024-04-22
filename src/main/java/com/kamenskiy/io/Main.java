@@ -1,5 +1,6 @@
 package com.kamenskiy.io;
 
+import com.kamenskiy.io.bonusCard.AccumFundsDebitCard;
 import com.kamenskiy.io.bonusCard.BonusCreditCard;
 import com.kamenskiy.io.bonusCard.BonusDebitCard;
 
@@ -9,16 +10,26 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Создание экземляра DebitCard с начальным балансом 10_000 и проверка его методов");
-        DebitCard debitCard = new DebitCard(BigDecimal.valueOf(10_000));
+        BankCard debitCard = new DebitCard(BigDecimal.valueOf(10_000));
         startOperationsWithCard(debitCard);
         System.out.println();
+
         System.out.println("Создание экземляра CreditCard с начальным балансом 20_000, кредитным лимитом 15_000 и проверка его методов");
-        CreditCard creditCard = new CreditCard(BigDecimal.valueOf(20000), BigDecimal.valueOf(15000));
+        BankCard creditCard = new CreditCard(BigDecimal.valueOf(20000), BigDecimal.valueOf(15000));
         startOperationsWithCard(creditCard);
+        System.out.println();
+
         System.out.println("Создание экземляра BonusDebitCard с начальным балансом 0, " +
                 "процентной ставкой бонусных баллов 1%");
         BankCard bonusDebitCard = new BonusDebitCard(BigDecimal.ZERO,1, BigDecimal.ZERO);
         startOperationsWithCard(bonusDebitCard);
+        System.out.println();
+
+        System.out.println("Создание экземляра AccumFundsDebitCard с начальным балансом 0, " +
+                "и с накопленными средства за все депозиты 0");
+        BankCard accumFundsDebitCard = new AccumFundsDebitCard(BigDecimal.ZERO, BigDecimal.ZERO);
+        startOperationsWithCard(accumFundsDebitCard);
+        System.out.println();
     }
 
     private static void startOperationsWithCard(BankCard card) {

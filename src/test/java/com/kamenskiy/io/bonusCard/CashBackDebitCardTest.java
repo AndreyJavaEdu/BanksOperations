@@ -15,7 +15,7 @@ class CashBackDebitCardTest {
         BigDecimal balanceInfo = cashBackDebitCard.getBalance();
         Assertions.assertFalse(resultOfPayOperation2);
         Assertions.assertTrue(resultOfPayOperation3);
-        Assertions.assertEquals(balanceInfo, new BigDecimal("10500.00"));
+        Assertions.assertEquals(balanceInfo, new BigDecimal("10500.000"));
     }
 
     @Test

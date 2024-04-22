@@ -23,7 +23,7 @@ class AccumFundsCreditCardTest {
         LOGGER.info("Сумма накоплений при депозите 2000: {}", creditCard.getAccumFunds());
         LOGGER.info("Баланс на карте после двух операций депозита по 1000: {}", creditCard.getBalance());
         Assertions.assertEquals(creditCard.getAccumFunds(), new BigDecimal("0.100000"));
-        Assertions.assertEquals(creditCard.getBalance(), new BigDecimal("2000.100000"));
+        Assertions.assertEquals(creditCard.getBalance(), new BigDecimal("2000.100"));
     }
 
     @Test

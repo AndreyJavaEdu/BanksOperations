@@ -23,7 +23,7 @@ class BonusDebitCardTest {
     void getAvailableFundsInfo_haveValuesForKeysOfMapAndMethodReturnNotNull() {
         var availableFundsInfo = bonusDebitCard2.getAvailableFundsInfo();
         Assertions.assertNotNull(availableFundsInfo);
-        Assertions.assertEquals(availableFundsInfo.get("Баланс на дебетовой карте с бонусными балами"), new BigDecimal("10000"));
+        Assertions.assertEquals(availableFundsInfo.get("Баланс на дебетовой карте с бонусными балами"), new BigDecimal("10000.000"));
         Assertions.assertEquals(availableFundsInfo.get("Количество бонусных баллов"), bonusDebitCard2.getBonusPoints());
     }
 }

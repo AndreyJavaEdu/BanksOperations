@@ -14,13 +14,39 @@ class CreditCardTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(CreditCardTest.class);
     CreditCard creditCard = new CreditCard(BigDecimal.ZERO, BigDecimal.valueOf(1000));
 
+
     @Test
-    void putMoney() {
-        creditCard.putMoney(BigDecimal.TEN);
-        Assertions.assertEquals(creditCard.balance, BigDecimal.valueOf(10));
-        creditCard.pay(BigDecimal.valueOf(500));
-        creditCard.putMoney(BigDecimal.valueOf(300));
-//        Assertions.assertEquals(creditCard.getBalanceInfo(), creditCard.creditPart);
+    void putMoney_creditPartEqualsCreditLimit() {
+        //arrange
+        creditCard = new CreditCard(BigDecimal.ZERO, BigDecimal.valueOf(2000));
+        //act
+        creditCard.putMoney(BigDecimal.valueOf(1000));
+        //assert
+        Assertions.assertEquals(new BigDecimal("1000.000"), creditCard.getBalance());
+    }
+
+    @Test
+    void putMoney_CreditPartLessThanCreditLimitAndBalanceZero() {
+        //arrange
+        creditCard = new CreditCard(BigDecimal.ZERO, BigDecimal.valueOf(3000));
+        creditCard.creditPart = BigDecimal.ZERO;
+        //act
+        creditCard.putMoney(new BigDecimal("3000.000"));
+        //assert
+        Assertions.assertEquals(new BigDecimal("0.000"), creditCard.getBalance());
+        Assertions.assertEquals(creditCard.creditPart, creditCard.getCreditLimit());
+    }
+
+    @Test
+    void putMoney_creditPartLessThanCreditLimitAndBalanceZero_insufficientAmount() {
+        //arrange
+        creditCard = new CreditCard(BigDecimal.ZERO, BigDecimal.valueOf(3000));
+        creditCard.creditPart = BigDecimal.ZERO;
+        //act
+        creditCard.putMoney(new BigDecimal("4000.000"));
+        //assert
+        Assertions.assertEquals(new BigDecimal("1000.000"), creditCard.getBalance());
+        Assertions.assertEquals(creditCard.creditPart, creditCard.getCreditLimit());
 
     }
 
@@ -43,7 +69,7 @@ class CreditCardTest {
     }
 
     @Test
-    void getAvailableFundsInfo_returnNotNullAndHaveKeyAndValueInMap(){
+    void getAvailableFundsInfo_returnNotNullAndHaveKeyAndValueInMap() {
         Map<String, BigDecimal> availableFundsInfo = creditCard.getAvailableFundsInfo();
         assertThat(availableFundsInfo).isNotNull();
         assertThat(availableFundsInfo).containsKey("Кредитный лимит кредитной карты");

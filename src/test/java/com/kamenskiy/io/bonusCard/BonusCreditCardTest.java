@@ -29,8 +29,6 @@ class BonusCreditCardTest {
         assertThat(resultPay1).isEqualTo(true);
         assertThat(resultPay2).isEqualTo(true);
         assertThat(creditCard.getBonusPoints()).isEqualTo(new BigDecimal("100.000"));
-
-
     }
 
     @Test
@@ -45,6 +43,5 @@ class BonusCreditCardTest {
         assertThat(availableFundsInfo).containsKey("Количество начисленных бонусных баллов");
         assertThat(availableFundsInfo).isUnmodifiable();
         assertThat(availableFundsInfo).containsEntry("Количество начисленных бонусных баллов", creditCard.getBonusPoints());
-
     }
 }

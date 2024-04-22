@@ -38,7 +38,6 @@ class CashBackCreditCardTest {
         LOGGER.info("Доступная кредитная часть стала: {}", creditCard.getCreditPart());
         Assertions.assertNotEquals(creditCard.getCreditPart(), new BigDecimal("3000.000"));
         Assertions.assertEquals(creditCard.getAllCashBack(), new BigDecimal("600.000"));
-
     }
 
     @Test

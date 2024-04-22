@@ -13,7 +13,6 @@ public class CashBackCreditCard extends CreditCard {
     public static final int MIN_SPEND_FOR_CASHBACK = 5000;
     private BigDecimal allCashBack;
 
-
     public BigDecimal getAllCashBack() {
         return allCashBack;
     }

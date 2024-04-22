@@ -41,10 +41,15 @@ public class Main {
         startOperationsWithCard(bonusCreditCard);
         System.out.println();
 
-        System.out.println("Создание экземляра класса AccumFundsDebitCard с начальным балансом 0 и кредитным лимитом 5000");
+        System.out.println("Создание экземляра класса AccumFundsCreditCard с начальным балансом 0 и кредитным лимитом 5000");
         BankCard accumFundsCreditCard = new AccumFundsCreditCard(BigDecimal.ZERO, BigDecimal.valueOf(5000));
         startOperationsWithCard(accumFundsCreditCard);
         System.out.println();
+
+        System.out.println("Создание экземляра класса CashBackDebitCard с начальным балансом 10_000 " +
+                "и кредитным лимитом 4_000 проверка его методов");
+        BankCard cashBackCreditCard = new CashBackCreditCard(BigDecimal.valueOf(10000), BigDecimal.valueOf(4000));
+        startOperationsWithCard(cashBackCreditCard);
     }
 
     private static void startOperationsWithCard(BankCard card) {
@@ -70,6 +75,5 @@ public class Main {
         System.out.println(availableFundsInfo);
         System.out.println("Окончание работы метода Получение информацию о доступных средствах - getAvailableFundsInfo()");
         System.out.println("--------------------------------------------------------------------------------------------");
-
     }
 }
